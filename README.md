@@ -16,6 +16,7 @@ CRAM is SaaS application designed to assist students and professionals consume w
 - **Database**: PostgreSQL
 - **Machine Learning**: TensorFlow/PyTorch
 - **Eye-tracking**: OpenCV
+- **Security & Authentication**: Firebase
 
 ## 👥 Our Team
 
