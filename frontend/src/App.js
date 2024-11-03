@@ -23,7 +23,7 @@ function App() {
   const WordChanger = () => {
     const words = ["1", "2", "3", "4"];
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
-    const delay = 1000-wordSpeed; // time in milliseconds (e.g., 2000 ms = 2 seconds)
+    const delay = 6000/wordSpeed; // time in milliseconds (e.g., 2000 ms = 2 seconds)
   
     useEffect(() => {
       const interval = setInterval(() => {
@@ -67,7 +67,7 @@ function App() {
             className="view-info" 
             onClick={() => window.open('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.greekmythology.com%2FTitans%2FPrometheus%2Fprometheus.html&psig=AOvVaw0fQlYt1WGkdgH6fEyH3vca&ust=1730759909879000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPipn5-dwYkDFQAAAAAdAAAAABAE', '_blank')}
           >
-            View relevant info
+            View relevant info Helllo
           </button>
           </div>
 
