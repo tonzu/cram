@@ -3,13 +3,13 @@ import './App.css';
 
 function App() {
   const [notes, setNotes] = useState('');
-  const [wordSpeed, setWordSpeed] = useState(500);
+  const [wordSpeed, setWordSpeed] = useState(100);
   const [recordedWords, setRecordedWords] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [eyeTracking, setEyeTracking] = useState(false);
   
   const handleSpeedChange = (e) => {
-    setWordSpeed(e.target.value);
+    setWordSpeed(e.target.value * 5);
   };
 
   const handlePlayPause = () => {
@@ -21,7 +21,7 @@ function App() {
   };
 
   const WordChanger = () => {
-    const words = ["1", "2", "3", "4"];
+    const words = ["Hi", "my", "name", "is", "Brenton"];
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const delay = 6000/wordSpeed; // time in milliseconds (e.g., 2000 ms = 2 seconds)
   
@@ -65,7 +65,7 @@ function App() {
             </div>
             <button 
             className="view-info" 
-            onClick={() => window.open('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.greekmythology.com%2FTitans%2FPrometheus%2Fprometheus.html&psig=AOvVaw0fQlYt1WGkdgH6fEyH3vca&ust=1730759909879000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPipn5-dwYkDFQAAAAAdAAAAABAE', '_blank')}
+            onClick={() => window.open('https://www.grindr.com/', '_blank')}
           >
             View relevant info Helllo
           </button>
@@ -83,9 +83,9 @@ function App() {
             <span>Word speed</span>
             <input
               type="range"
-              min="100"
-              max="1000"
-              value={wordSpeed}
+              min="1"
+              max="150"
+              value={wordSpeed / 5}
               onChange={handleSpeedChange}
             />
             <span>{wordSpeed}</span>
@@ -97,6 +97,7 @@ function App() {
               />
               Eye-Tracking
             </label>
+            
           </div>
         </div>
 
