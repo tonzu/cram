@@ -3,6 +3,7 @@ import os
 
 def s3_retrieve(s3_key):
 
+    # Local directory to save files from S3
     upload_folder = './uploads'
     os.makedirs(upload_folder, exist_ok=True)
     
@@ -14,8 +15,8 @@ def s3_retrieve(s3_key):
         aws_secret_access_key=os.getenv('AWS_SECRET_KEY')
     )
 
+    # Saves file from S3 to local folder to be processed
     local_path = os.path.join('./uploads', os.path.basename(s3_key))
-
     s3_client.download_file('open-project-cram', s3_key, local_path)
 
     return local_path
