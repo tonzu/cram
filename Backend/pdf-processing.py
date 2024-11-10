@@ -2,6 +2,8 @@ import os
 import boto3  # AWS Python
 import fitz  #for PDF processing
 import psycopg2 
+from upload_pdf import s3_upload
+from read_pdf import s3_retrieve
 from sqlalchemy import create_engine, Column, Integer, String, Text, LargeBinary
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -18,20 +20,10 @@ class PDFDocument(Base):
     text_content = Column(Text, nullable=True)
     # Do we need images, form
 
-#  PDF to AWS S3
-def upload_pdf_to_s3(file_path, bucket_name, s3_client):
-    
-    filename = os.path.basename(file_path)
-    # Define the S3 key 
-    s3_key = f"pdfs/{filename}"
-    # Upload the file to S3
-    s3_client.upload_file(file_path, bucket_name, s3_key)
-    return s3_key
-
 # process PDF and extract text
 def process_pdf(file_path):
     # Open the PDF file
-    doc = fitz.open(file_path)
+    doc = fitz.open(s3_retrieve(file_path))
     text_content = ""
     
     #Iterate over each page 
@@ -57,7 +49,7 @@ def handle_pdf(file_path):
     )
     
     
-    s3_key = upload_pdf_to_s3(file_path, bucket_name, s3_client)
+    s3_key = s3_upload()
     
    
     text_content = process_pdf(file_path)
