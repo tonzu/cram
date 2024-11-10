@@ -5,7 +5,6 @@ from werkzeug.utils import secure_filename
 
 def s3_upload():
 
-    file_types = {'application/pdf', 'image/jpeg', 'image/png', 'text/plain'}
     upload_folder = './uploads'
 
     # S3 connection
