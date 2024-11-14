@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';import './App.css';
+import React, { useState, useEffect, useRef } from 'react';
+import './App.css';
+import { jsPDF } from 'jspdf';
 import { contentArray } from './wordcontent'; // Make sure the path is correct
 
 function App() {
@@ -19,6 +21,18 @@ function App() {
   const handleEyeTracking = () => {
     setEyeTracking(!eyeTracking);
   };
+
+  // Function to export notes
+  const handleExportNotes = () => {
+    const doc = new jsPDF();
+  
+    // Add the notes text to the PDF
+    doc.text(notes, 10, 10); // (10, 10) sets the position on the PDF page
+  
+    // Save the PDF
+    doc.save('notes.pdf');
+  };
+  
 
   // Flashing words component
   const WordChanger = () => {
@@ -55,30 +69,32 @@ function App() {
       </div>
     );
   };
-  
-  
 
   return (
     <div className="reader-container">
       {/* Left column for Notes */}
       <div className="left-column">
-        <textarea 
-          placeholder="Notes"
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-        />
-      </div>
+  <button onClick={handleExportNotes} className="export-notes-button">
+      Export Notes
+  </button>
+  <textarea 
+    placeholder="Notes"
+    value={notes}
+    onChange={(e) => setNotes(e.target.value)}
+  />
+</div>
+
 
       {/* Center column for flashing words and controls */}
       <div className="center-column">
-      <div class="progress-bar">
-    <div class="progress-indicator"></div>
-    </div>
+        <div className="progress-bar">
+          <div className="progress-indicator"></div>
+        </div>
 
         {/* Word Bank above flashing words */}
         <div className="word-bank">
-          <h3>Word bank</h3>
-          <textarea placeholder="Word bank" className="word-bank-textbox"></textarea>
+          <h3>Word Bank</h3>
+          <textarea placeholder="Add words here!" className="word-bank-textbox"></textarea>
           <button>View relevant info</button>
         </div>
 
@@ -112,25 +128,25 @@ function App() {
         <div className="pdf-preview">
           <h2>CS 70</h2>
           <p>
-  CS 70<br />
-  Discrete Mathematics and Probability Theory<br />
-  Fall 2024<br />
-  Course Notes<br />
-  Note 8<br /><br />
-  1. Polynomials<br />
-  Polynomials constitute a rich class of functions that are both easy to describe and widely applicable
-  in topics ranging from Fourier analysis, cryptography, and communication, to control and computational
-  geometry. In this note, we will discuss further properties of polynomials that make them so useful. The
-  key idea here is to extend what you already know about polynomials over the real and complex numbers
-  to modulo arithmetic. We will then describe how to take advantage of these properties to develop a secret-
-  sharing scheme.<br /><br />
-  Recall that a polynomial in a single variable is an expression that has an associated function. The polynomial
-  expression is p(x) = adxd + ad−1xd−1 + … + a1x + a0. Here the variable x and the coefficients ai are
-  usually real numbers. For example, p(x) = 5x3 + 2x + 1 is a polynomial of degree d = 3. Its coefficients
-  are a3 = 5, a2 = 0, a1 = 2, and a0 = 1. Polynomials have some remarkably simple, elegant, and powerful
-  properties, which we will explore in this note.<br /><br />
-  ...
-</p>
+            CS 70<br />
+            Discrete Mathematics and Probability Theory<br />
+            Fall 2024<br />
+            Course Notes<br />
+            Note 8<br /><br />
+            1. Polynomials<br />
+            Polynomials constitute a rich class of functions that are both easy to describe and widely applicable
+            in topics ranging from Fourier analysis, cryptography, and communication, to control and computational
+            geometry. In this note, we will discuss further properties of polynomials that make them so useful. The
+            key idea here is to extend what you already know about polynomials over the real and complex numbers
+            to modulo arithmetic. We will then describe how to take advantage of these properties to develop a secret-
+            sharing scheme.<br /><br />
+            Recall that a polynomial in a single variable is an expression that has an associated function. The polynomial
+            expression is p(x) = adxd + ad−1xd−1 + … + a1x + a0. Here the variable x and the coefficients ai are
+            usually real numbers. For example, p(x) = 5x3 + 2x + 1 is a polynomial of degree d = 3. Its coefficients
+            are a3 = 5, a2 = 0, a1 = 2, and a0 = 1. Polynomials have some remarkably simple, elegant, and powerful
+            properties, which we will explore in this note.<br /><br />
+            ...
+          </p>
         </div>
       </div>
     </div>
