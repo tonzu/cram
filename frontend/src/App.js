@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React, { useState, useEffect, useRef } from 'react';import './App.css';
+import { contentArray } from './wordcontent'; // Make sure the path is correct
 
 function App() {
   const [notes, setNotes] = useState('');
@@ -20,95 +20,121 @@ function App() {
     setEyeTracking(!eyeTracking);
   };
 
+  // Flashing words component
   const WordChanger = () => {
-    const words = ["Hi", "my", "name", "is", "Brenton"];
-    const [currentWordIndex, setCurrentWordIndex] = useState(0);
-    const delay = 6000/wordSpeed; // time in milliseconds (e.g., 2000 ms = 2 seconds)
+    const words = contentArray; // Use your array of words
+    const [currentWordIndex, setCurrentWordIndex] = useState(0); // Maintain current word index
+    const delay = 6000 / wordSpeed; // Adjust speed based on wordSpeed state
+    const intervalRef = useRef(null); // Ref to keep track of the interval
   
+    // Update the word index if playing
     useEffect(() => {
-      const interval = setInterval(() => {
-        setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-      }, delay);
+      if (isPlaying) {
+        // Set up interval only if playing
+        intervalRef.current = setInterval(() => {
+          setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+        }, delay);
+      } else {
+        // Clean up interval when paused
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      }
   
-      // Clean up the interval on component unmount
-      return () => clearInterval(interval);
-    }, [words.length, delay]);
+      // Cleanup interval on component unmount
+      return () => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      };
+    }, [isPlaying, delay, words.length]); // Dependencies include isPlaying, delay, and words.length
   
-    return <div>{words[currentWordIndex]}</div>;
+    return (
+      <div className="flashing-word-container">
+        <div className="flashing-word">{words[currentWordIndex]}</div>
+      </div>
+    );
   };
+  
+  
 
   return (
     <div className="reader-container">
-      <div className="progress-bar">
-        <div className="progress-indicator" />
+      {/* Left column for Notes */}
+      <div className="left-column">
+        <textarea 
+          placeholder="Notes"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+        />
+      </div>
+
+      {/* Center column for flashing words and controls */}
+      <div className="center-column">
+      <div class="progress-bar">
+    <div class="progress-indicator"></div>
+    </div>
+
+        {/* Word Bank above flashing words */}
+        <div className="word-bank">
+          <h3>Word bank</h3>
+          <textarea placeholder="Word bank" className="word-bank-textbox"></textarea>
+          <button>View relevant info</button>
+        </div>
+
+        {/* Flashing word container */}
+        <WordChanger />
+
+        {/* Playback controls */}
+        <div className="player-controls">
+          <button>⏪</button>
+          <button onClick={handlePlayPause}>{isPlaying ? '⏸' : '▶'}</button>
+          <button>⏩</button>
+        </div>
+
+        {/* Speed control */}
+        <div className="speed-control">
+          <span>Word speed</span>
+          <input 
+            type="range" 
+            min="1" 
+            max="150" 
+            value={wordSpeed / 5} 
+            onChange={handleSpeedChange} 
+          />
+          <span>{wordSpeed}</span>
+          <label><input type="checkbox" checked={eyeTracking} onChange={handleEyeTracking} /> Eye-Tracking</label>
+        </div>
       </div>
       
-      <div className="main-content">
-        <div className="notes-section">
-          <textarea
-            placeholder="Notes and stuff"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-          />
-          <button className="share-button">
-            <span>↗</span>
-          </button>
-        </div>
-
-        <div className="word-bank">
-          <div className="recorded-words">
-            <h3>Word bank</h3>
-            <div className="words-list">
-              {recordedWords.map((word, index) => (
-                <div key={index} className="word-item">{word}</div>
-              ))}
-            </div>
-            <button 
-            className="view-info" 
-            onClick={() => window.open('https://www.grindr.com/', '_blank')}
-          >
-            View relevant info Helllo
-          </button>
-          </div>
-
-          <div className="player-controls">
-            <button className="control-btn">⏪</button>
-            <button className="control-btn" onClick={handlePlayPause}>
-              {isPlaying ? '⏸' : '▶'}
-            </button>
-            <button className="control-btn">⏩</button>
-          </div>
-
-          <div className="speed-control">
-            <span>Word speed</span>
-            <input
-              type="range"
-              min="1"
-              max="150"
-              value={wordSpeed / 5}
-              onChange={handleSpeedChange}
-            />
-            <span>{wordSpeed}</span>
-            <label className="eye-tracking">
-              <input
-                type="checkbox"
-                checked={eyeTracking}
-                onChange={handleEyeTracking}
-              />
-              Eye-Tracking
-            </label>
-            
-          </div>
-        </div>
-
-        <div className="text-display">
-          {/* Lorem ipsum text content */}
-          <WordChanger />
+      {/* Right column for PDF Preview */}
+      <div className="right-column">  
+        <div className="pdf-preview">
+          <h2>CS 70</h2>
+          <p>
+  CS 70<br />
+  Discrete Mathematics and Probability Theory<br />
+  Fall 2024<br />
+  Course Notes<br />
+  Note 8<br /><br />
+  1. Polynomials<br />
+  Polynomials constitute a rich class of functions that are both easy to describe and widely applicable
+  in topics ranging from Fourier analysis, cryptography, and communication, to control and computational
+  geometry. In this note, we will discuss further properties of polynomials that make them so useful. The
+  key idea here is to extend what you already know about polynomials over the real and complex numbers
+  to modulo arithmetic. We will then describe how to take advantage of these properties to develop a secret-
+  sharing scheme.<br /><br />
+  Recall that a polynomial in a single variable is an expression that has an associated function. The polynomial
+  expression is p(x) = adxd + ad−1xd−1 + … + a1x + a0. Here the variable x and the coefficients ai are
+  usually real numbers. For example, p(x) = 5x3 + 2x + 1 is a polynomial of degree d = 3. Its coefficients
+  are a3 = 5, a2 = 0, a1 = 2, and a0 = 1. Polynomials have some remarkably simple, elegant, and powerful
+  properties, which we will explore in this note.<br /><br />
+  ...
+</p>
         </div>
       </div>
-
     </div>
   );
-};
+}
 
 export default App;
