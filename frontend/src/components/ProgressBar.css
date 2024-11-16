@@ -1,0 +1,13 @@
+.progress-bar {
+    position: relative;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+  
+  .progress {
+    width: 50%; /* Example value, update based on state */
+    height: 100%;
+    background-color: #a084ca;
+    border-radius: 5px;
+  }

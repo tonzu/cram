@@ -1,0 +1,45 @@
+.notes-content:empty:before {
+  content: attr(placeholder);
+  color: gray;
+}
+.notes {
+  position: relative;
+  padding: 20px;
+  border: none; /* Remove the gray outline */
+  border-radius: 5px;
+}
+
+.notes-content {
+  min-height: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: relative; /* Ensure button stays within this box */
+}
+
+.export-button-wrapper {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.export-button {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.export-button:hover {
+  background-color: #f0f0f0; /* Light gray on hover */
+}
+
+.export-button .icon {
+  width: 20px;
+  height: 20px;
+}
