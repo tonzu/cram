@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut as firebaseSignOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 // Your Firebase config
 const firebaseConfig = {
@@ -38,6 +38,20 @@ const signIn = async (email, password) => {
   }
 };
 
+// Google Sign-in function
+const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("Signed in with Google as:", user.displayName);
+    return user;
+  } catch (error) {
+    console.error("Error signing in with Google:", error.message);
+    throw error;
+  }
+};
+
 // Sign out function
 const signOut = async () => {
   try {
@@ -54,4 +68,4 @@ const onAuthChange = (callback) => {
   return onAuthStateChanged(auth, callback);
 };
 
-export { signUp, signIn, signOut, onAuthChange };
+export { signUp, signIn, signOut, onAuthChange, signInWithGoogle };
