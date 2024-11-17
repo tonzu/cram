@@ -82,6 +82,7 @@ function App() {
           placeholder="Notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
+          className="textarea"
         />
       </div>
 

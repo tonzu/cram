@@ -125,6 +125,8 @@
    border: none;
    resize: none;
    background-color: #ffffff; /* Light gray background for the text box */
+  font-family: 'Times new roman, sans-serif'; /* Replace with your desired font */
+  font-size: 16px; /* Adjust the size */
 }
 
 
@@ -158,4 +160,11 @@
   display:flex;
   gap: 10px;
   margin-bottom:5px;
+}
+
+
+.textarea {
+  font-family: 'Times new roman, sans-serif'; /* Replace with your desired font */
+  font-size: 16px; /* Adjust the size */
+  color: #333; /* Optional: Adjust text color */
 }
