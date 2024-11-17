@@ -9,7 +9,7 @@ function App() {
   const [recordedWords, setRecordedWords] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [eyeTracking, setEyeTracking] = useState(false);
-  
+
   const handleSpeedChange = (e) => {
     setWordSpeed(e.target.value * 5);
   };
@@ -25,22 +25,23 @@ function App() {
   // Function to export notes
   const handleExportNotes = () => {
     const doc = new jsPDF();
-  
+
     // Add the notes text to the PDF
     doc.text(notes, 10, 10); // (10, 10) sets the position on the PDF page
-  
+
     // Save the PDF
     doc.save('notes.pdf');
   };
-  
+
 
   // Flashing words component
   const WordChanger = () => {
+
     const words = contentArray; // Use your array of words
     const [currentWordIndex, setCurrentWordIndex] = useState(0); // Maintain current word index
-    const delay = 6000 / wordSpeed; // Adjust speed based on wordSpeed state
+    const delay = 60000 / wordSpeed; // Adjust speed based on wordSpeed state
     const intervalRef = useRef(null); // Ref to keep track of the interval
-  
+
     // Update the word index if playing
     useEffect(() => {
       if (isPlaying) {
@@ -54,7 +55,7 @@ function App() {
           clearInterval(intervalRef.current);
         }
       }
-  
+
       // Cleanup interval on component unmount
       return () => {
         if (intervalRef.current) {
@@ -62,7 +63,7 @@ function App() {
         }
       };
     }, [isPlaying, delay, words.length]); // Dependencies include isPlaying, delay, and words.length
-  
+
     return (
       <div className="flashing-word-container">
         <div className="flashing-word">{words[currentWordIndex]}</div>
@@ -74,15 +75,15 @@ function App() {
     <div className="reader-container">
       {/* Left column for Notes */}
       <div className="left-column">
-  <button onClick={handleExportNotes} className="export-notes-button">
-      Export Notes
-  </button>
-  <textarea 
-    placeholder="Notes"
-    value={notes}
-    onChange={(e) => setNotes(e.target.value)}
-  />
-</div>
+        <button onClick={handleExportNotes} className="export-notes-button">
+          Export Notes
+        </button>
+        <textarea
+          placeholder="Notes"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+        />
+      </div>
 
 
       {/* Center column for flashing words and controls */}
@@ -111,23 +112,27 @@ function App() {
         {/* Speed control */}
         <div className="speed-control">
           <span>Word speed</span>
-          <input 
-            type="range" 
-            min="1" 
-            max="150" 
-            value={wordSpeed / 5} 
-            onChange={handleSpeedChange} 
+          <input
+            type="range"
+            min="1"
+            max="150"
+            value={wordSpeed / 5}
+            onChange={handleSpeedChange}
           />
           <span>{wordSpeed}</span>
           <label><input type="checkbox" checked={eyeTracking} onChange={handleEyeTracking} /> Eye-Tracking</label>
         </div>
       </div>
-      
+
       {/* Right column for PDF Preview */}
-      <div className="right-column">  
+      <div className="right-column">
+        <div className = "buttonContainer">        
+          <button className="Functionality">Import</button>
+          <button className="Functionality">Sign out</button>
+        </div>
         <div className="pdf-preview">
           <h2>CS 70</h2>
-          <p>
+          <p id='cs70-test-notes'>
             CS 70<br />
             Discrete Mathematics and Probability Theory<br />
             Fall 2024<br />
