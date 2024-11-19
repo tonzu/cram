@@ -1,0 +1,51 @@
+.center-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(237, 237, 237);
+  }
+  
+  .progress-bar {
+    background-color: #444;
+    height: 8px;
+    width: calc(100% - 40px);
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .progress-indicator {
+    background-color: red;
+    height: 100%;
+    width: 30%;
+    border-radius: 4px;
+  }
+  
+  .controls-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .word-bank {
+    background: rgb(237, 237, 237);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .word-bank h3 {
+    margin-bottom: 10px;
+  }
+  
+  .word-bank-textbox {
+    width: 90%;
+    height: 100px;
+    border-radius: 8px;
+    padding: 10px;
+    border: none;
+    resize: none;
+    background-color: #ffffff;
+  }
