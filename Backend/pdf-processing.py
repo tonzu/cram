@@ -62,7 +62,7 @@ def handle_pdf(file_path):
     db_name = ''  
     
     # Create a database engine
-    engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+    engine = create_engine('postgresql://cram_owner:SZXGa9nA6cIN@ep-icy-union-a59g3itp.us-east-2.aws.neon.tech/cram?sslmode=require')
     # tables 
     Base.metadata.create_all(engine)
     # session
