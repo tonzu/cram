@@ -1,0 +1,29 @@
+.right-column {
+    background-color: hsl(0, 0%, 24%);
+    padding: 15px;
+  }
+  
+  .pdf-preview {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  
+  .Functionality {
+    background-color: #ff5722;
+    border-radius: 7px;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 12px;
+    padding: 7px 18px;
+    text-decoration: none;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+  }

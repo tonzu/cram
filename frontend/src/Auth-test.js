@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUp, signIn, signOut, onAuthChange } from "./Firebase"; // Add signOut import
-import "./Auth-test.css"; // Import your CSS file
+import { signUp, signIn, signOut, onAuthChange, signInWithGoogle } from "./Firebase"; // Updated import to include Google sign-in
+import "./Auth-test.css";
 
 const AuthTest = () => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Update useEffect to ensure that the user is signed out properly
   useEffect(() => {
     const unsubscribe = onAuthChange((currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         navigate("/app"); // Redirect to /app after successful login
       } else {
-        setUser(null); // Set user to null when signed out
+        setUser(null);
       }
     });
-
-    return () => unsubscribe(); // Cleanup subscription on unmount
+    return () => unsubscribe();
   }, [navigate]);
 
   const handleSignUp = async () => {
@@ -52,6 +50,15 @@ const AuthTest = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const googleUser = await signInWithGoogle();
+      setUser(googleUser);
+    } catch (error) {
+      setError("Google sign-in failed");
+    }
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-box">
@@ -62,7 +69,7 @@ const AuthTest = () => {
           </div>
         ) : (
           <div className="auth-form">
-            <h2>Sign In / Sign Up</h2>
+            <h2>Login to CRAM</h2>
             <input
               type="email"
               value={email}
@@ -78,6 +85,7 @@ const AuthTest = () => {
             <div>
               <button onClick={handleSignUp}>Sign Up</button>
               <button onClick={handleSignIn}>Sign In</button>
+              <button onClick={handleGoogleSignIn}>Sign in with Google</button>
             </div>
             {error && <p className="error">{error}</p>}
           </div>
