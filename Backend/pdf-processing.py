@@ -21,22 +21,6 @@ class PDFDocument(Base):
     text_content = Column(Text, nullable=True)
     # Do we need images, form
 
-# process PDF and extract text
-def process_pdf(file_path):
-    # Open the PDF file
-    doc = fitz.open(s3_retrieve(file_path))
-    text_content = ""
-    
-    #Iterate over each page 
-    for page_num in range(len(doc)):
-        page = doc[page_num]
-        text = page.get_text()
-        text_content += text
-    
-    doc.close()
-    
-    return text_content
-
 # upload and processing
 def handle_pdf(file_path):
    
