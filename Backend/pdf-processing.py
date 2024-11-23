@@ -2,6 +2,7 @@ import os
 import boto3  # AWS Python
 import fitz  #for PDF processing
 import psycopg2 
+from extract_data_pdf import process_pdf
 from upload_pdf import s3_upload
 from read_pdf import s3_retrieve
 from sqlalchemy import create_engine, Column, Integer, String, Text, LargeBinary
@@ -51,8 +52,11 @@ def handle_pdf(file_path):
     
     s3_key = s3_upload()
     
+
+    extracted_data_content = process_pdf(file_path)
    
-    text_content = process_pdf(file_path)
+    text_content = extracted_data_content["PDF text"]
+    image_directories = extracted_data_content["PDF images"]
     
     ########## repalce###### 
     db_user = ''  
