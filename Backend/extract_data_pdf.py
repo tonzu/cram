@@ -18,6 +18,13 @@ options = {
 }
 
 def process_pdf(pdf_path):
+    """
+    Input: PDF path 
+    Ouput: Dictionary containing keys "PDF text", "PDF images"
+    PDF text contains the string of text content from the pdf
+    PDF images is a python list of paths to each image from the PDF in the order they showed up.
+    Currently, the extracted data is stored in a new folder in the same directory as this program
+    """
     pdf_id = upload_pdf(pdf_path)
     extracted_contents_dir = extract_text(pdf_id)
     extracted_data = extract_data(extracted_contents_dir)
@@ -111,7 +118,6 @@ def extract_data(extracted_contents_dir):
         # Step 3: Extract text from the .tex file
         with open(tex_file, "r", encoding="utf-8") as f:
             tex_content = f.read()
-        print(tex_content)
 
 
     # Step 4: Locate and save images
@@ -121,4 +127,11 @@ def extract_data(extracted_contents_dir):
 
 
     return {"PDF text": tex_content, "PDF images": image_files}
+
+pdf_path = "n8p1.pdf"
+
+extracted_data = process_pdf(pdf_path)
+
+print(extracted_data["PDF text"])
+print(extracted_data["PDF images"])
 
