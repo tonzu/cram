@@ -128,10 +128,12 @@ def extract_data(extracted_contents_dir):
 
     return {"PDF text": tex_content, "PDF images": image_files}
 
-pdf_path = "n8p1.pdf"
 
-extracted_data = process_pdf(pdf_path)
+# example usage
+#pdf_path = "n8p1.pdf"
 
-print(extracted_data["PDF text"])
-print(extracted_data["PDF images"])
+#extracted_data = process_pdf(pdf_path)
+
+#print(extracted_data["PDF text"])
+#print(extracted_data["PDF images"])
 
