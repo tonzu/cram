@@ -1,5 +1,9 @@
 .left-column {
-    background-color: hsl(0, 0%, 24%);
+    background: linear-gradient(
+      to bottom,
+      #336699, /* Dark blue at the top */
+      #e0e0e0  /* Light blue at the bottom */
+    );
     padding: 20px;
     position: relative;
     display: flex;
@@ -17,7 +21,7 @@
     bottom: 20px;
     right: 13px;
     padding: 5px 10px;
-    background-color: #ff5722;
+    background-color: #384959;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -26,3 +30,4 @@
     opacity: 0.9;
     align-self: flex-start;
   }
+  

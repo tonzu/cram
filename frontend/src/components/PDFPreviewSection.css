@@ -1,5 +1,9 @@
 .right-column {
-    background-color: hsl(0, 0%, 24%);
+    background: linear-gradient(
+      to bottom,
+      #336699, /* Dark blue at the top */
+      #e0e0e0  /* Light blue at the bottom */
+    );
     padding: 15px;
   }
   
@@ -10,7 +14,7 @@
   }
   
   .Functionality {
-    background-color: #ff5722;
+    background-color: #384959;
     border-radius: 7px;
     border: none;
     display: inline-block;
