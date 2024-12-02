@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUp, signIn, signOut, onAuthChange, signInWithGoogle } from "./Firebase"; // Updated import to include Google sign-in
+import { signUp, signIn, signOut, onAuthChange, signInWithGoogle } from "./Firebase";
 import "./Auth-test.css";
+import backgroundVideo from "./background.mp4";
+import { FcGoogle } from "react-icons/fc";
+
 
 const AuthTest = () => {
   const [user, setUser] = useState(null);
@@ -14,7 +17,7 @@ const AuthTest = () => {
     const unsubscribe = onAuthChange((currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        navigate("/app"); // Redirect to /app after successful login
+        navigate("/app");
       } else {
         setUser(null);
       }
@@ -42,9 +45,9 @@ const AuthTest = () => {
 
   const handleSignOut = async () => {
     try {
-      await signOut(); // Call Firebase signOut function
-      setUser(null); // Reset the user state to null
-      navigate("/"); // Redirect to login page after sign-out
+      await signOut();
+      setUser(null);
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }
@@ -54,13 +57,22 @@ const AuthTest = () => {
     try {
       const googleUser = await signInWithGoogle();
       setUser(googleUser);
-    } catch (error) {
+    } catch (err) {
       setError("Google sign-in failed");
     }
   };
 
+  const handleInputChange = (setter) => (e) => {
+    setter(e.target.value);
+    setError(null);
+  };
+
   return (
     <div className="auth-container">
+      <video className="auth-video" autoPlay loop muted>
+        <source src={backgroundVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       <div className="auth-box">
         {user ? (
           <div>
@@ -69,23 +81,25 @@ const AuthTest = () => {
           </div>
         ) : (
           <div className="auth-form">
-            <h2>Login to CRAM</h2>
+            <h2>Welcome to CRAM</h2>
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleInputChange(setEmail)}
               placeholder="Email"
             />
             <input
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleInputChange(setPassword)}
               placeholder="Password"
             />
             <div>
               <button onClick={handleSignUp}>Sign Up</button>
               <button onClick={handleSignIn}>Sign In</button>
-              <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+              <button onClick={handleGoogleSignIn} className="google-signin">
+                <FcGoogle className="google-icon" /> Sign in with Google
+              </button>
             </div>
             {error && <p className="error">{error}</p>}
           </div>
