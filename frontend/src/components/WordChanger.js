@@ -2,26 +2,26 @@ import React, { useState, useEffect, useRef } from 'react';
 import { contentArray } from './wordcontent';
 import './WordChanger.css';
 
-function WordChanger({ isPlaying, wordSpeed }) {
+function WordChanger({ isPlaying, wordSpeed, onWordChange }) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const delay = 60000 / wordSpeed;
   const intervalRef = useRef(null);
+
+  useEffect(() => {
+    onWordChange(contentArray[currentWordIndex]);
+  }, [currentWordIndex, onWordChange]);
 
   useEffect(() => {
     if (isPlaying) {
       intervalRef.current = setInterval(() => {
         setCurrentWordIndex((prevIndex) => (prevIndex + 1) % contentArray.length);
       }, delay);
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+    } else if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [isPlaying, delay]);
 
