@@ -1,6 +1,8 @@
+// Auth-test.js
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUp, signIn, signOut, onAuthChange, signInWithGoogle } from "./Firebase"; // Updated import to include Google sign-in
+import { signUp, signIn, signOut, onAuthChange, signInWithGoogle } from "./Firebase"; // Import functions
 import "./Auth-test.css";
 
 const AuthTest = () => {
@@ -11,21 +13,31 @@ const AuthTest = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = onAuthChange((currentUser) => {
-      if (currentUser) {
+  const unsubscribe = onAuthChange((currentUser) => {
+    if (currentUser) {
+      if (currentUser.emailVerified) {
+        // If email is verified, proceed to the app
         setUser(currentUser);
-        navigate("/app"); // Redirect to /app after successful login
+        navigate("/app");
       } else {
+        // If not verified, show message
         setUser(null);
+        //alert("Please verify your email before logging in.");
       }
-    });
-    return () => unsubscribe();
-  }, [navigate]);
+    } else {
+      setUser(null); // No user is logged in, stay on login screen
+    }
+  });
+  return () => unsubscribe();
+}, [navigate]);
+
 
   const handleSignUp = async () => {
     try {
       const newUser = await signUp(email, password);
+      // Email verification is automatically triggered within signUp function.
       setUser(newUser);
+      // alert("Please check your email for the verification link.");
     } catch (err) {
       setError(err.message);
     }
@@ -34,7 +46,13 @@ const AuthTest = () => {
   const handleSignIn = async () => {
     try {
       const signedInUser = await signIn(email, password);
-      setUser(signedInUser);
+      if (signedInUser.emailVerified) {
+        setUser(signedInUser);
+        navigate("/app"); // Redirect to app if email is verified
+      } else {
+        //alert("Please verify your email before logging in.");
+        setUser(null); // Clear user state if email is not verified
+      }
     } catch (err) {
       setError(err.message);
     }
@@ -54,6 +72,7 @@ const AuthTest = () => {
     try {
       const googleUser = await signInWithGoogle();
       setUser(googleUser);
+      navigate("/app"); // Directly navigate to /app if sign-in with Google succeeds
     } catch (error) {
       setError("Google sign-in failed");
     }
