@@ -31,3 +31,11 @@
     gap: 10px;
     margin-bottom: 5px;
   }
+
+  #cs70-test-notes img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 4px 0;
+  }

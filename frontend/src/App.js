@@ -16,6 +16,9 @@ function App() {
     <div className="reader-container">
       <NotesSection notes={notes} setNotes={setNotes} />
       <WordChangerSection 
+        notes={notes} // Pass notes
+        setNotes={setNotes} // Pass setNotes function
+        wordSpeed={wordSpeed}
         wordSpeed={wordSpeed}
         setWordSpeed={setWordSpeed}
         isPlaying={isPlaying}

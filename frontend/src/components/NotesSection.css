@@ -1,33 +1,88 @@
 .left-column {
-    background: linear-gradient(
+  background: linear-gradient(
       to bottom,
       #336699, /* Dark blue at the top */
-      #e0e0e0  /* Light blue at the bottom */
-    );
-    padding: 20px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .left-column textarea {
-    width: 100%;
-    flex-grow: 1;
-    height: 70%;
-  }
-  
-  .export-notes-button {
-    position: absolute;
-    bottom: 20px;
-    right: 13px;
-    padding: 5px 10px;
-    background-color: #384959;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    opacity: 0.9;
-    align-self: flex-start;
-  }
-  
+      #e0e0e0  /* Light blue at the bottom */);
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for the Export Notes button */
+.export-notes-button {
+  position: absolute;
+  bottom: 20px;
+  right: 13px;
+  padding: 8px 16px; /* Adjusted padding for better button appearance */
+  background-color: #ff5722; /* Bright orange button */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px; /* Slightly larger font */
+  opacity: 0.9;
+  transition: opacity 0.3s, transform 0.3s; /* Add transition effects */
+}
+
+.export-notes-button:hover {
+  opacity: 1; /* Fully opaque on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* Toolbar styling */
+.ql-toolbar {
+  background-color: #333; /* Dark background for toolbar */
+  color: white; /* Ensure text/icons in toolbar are white */
+  border: none; /* Remove default border */
+  border-radius: 8px 8px 0 0; /* Match the editor's rounded corners */
+}
+
+.ql-toolbar .ql-stroke {
+  fill: none;
+  stroke: #fff;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #fff;
+  stroke: none;
+}
+
+.ql-toolbar .ql-picker {
+  color: #fff;
+}
+
+/* Toolbar icons (hover state) */
+.ql-toolbar button:hover,
+.ql-toolbar .ql-picker:hover {
+  color: #ff5722;
+}
+
+/* Toolbar icons (active state) */
+.ql-toolbar button.ql-active {
+  color: #ff5722; /* Highlight active icons with orange color */
+  background-color: transparent; /* Keep the background transparent */
+}
+
+/* Quill editor container */
+.ql-container {
+  background-color: white; /* White background for the text editor */
+  color: black; /* Black text color for better contrast */
+  border-radius: 0 0 8px 8px; /* Match the toolbar's rounded corners */
+}
+
+/* Placeholder text inside the editor */
+.ql-editor::before {
+  color: #aaa; /* Light grey placeholder text */
+  font-style: italic; /* Italic style for placeholder */
+}
+
+/* Editor text styling */
+.ql-editor {
+  font-family: Arial, sans-serif; /* Default font for the editor */
+  font-size: 16px; /* Readable font size */
+  line-height: 1.5; /* Comfortable line spacing */
+  color: black; /* Ensure text inside the editor is black */
+  padding: 10px; /* Add padding for better text alignment */
+  max-height: 770px;
+}

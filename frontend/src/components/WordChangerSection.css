@@ -10,22 +10,26 @@
   );
 }
 
+/* Progress Bar Container */
 .progress-bar {
-  background-color: #384959;
-  height: 8px;
-  width: calc(100% - 180px);
-  border-radius: 4px;
-  position: relative;
-  padding: 5px;
-  margin-top: 20px;
+  background-color: #384959; /* Dark background for the bar */
+  height: 8px; /* Height of the progress bar */
+  width: calc(100% - 180px); /* Make it responsive to the container width */
+  border-radius: 4px; /* Rounded corners */
+  position: relative; /* Position for inner indicator */
+  margin-top: 20px; /* Space above the bar */
+  overflow: hidden; /* Prevent overflow of the indicator */
 }
 
+/* Progress Indicator */
 .progress-indicator {
-  background-color: #88BDF2;
-  height: 100%;
-  width: 30%;
-  border-radius: 4px;
+  background-color: #88BDF2; /* Light blue to indicate progress */
+  height: 100%; /* Full height of the bar */
+  width: 0%; /* Initial width set to 0 */
+  border-radius: 4px; /* Rounded corners to match the container */
+  transition: width 0.2s ease-in-out; /* Smooth transition for dynamic updates */
 }
+
 
 .controls-section {
   display: flex;

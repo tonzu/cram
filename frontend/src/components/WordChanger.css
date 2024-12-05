@@ -17,3 +17,19 @@
     font-weight: bold;
     text-align: center;
   }
+
+  .flashing-word img {
+    max-height: 200px;
+    width: auto;
+    object-fit: contain;
+  }
+  
+  .word {
+    padding: 2px;
+    margin: 0 2px;
+  }
+  
+  .highlighted {
+    background-color: yellow;
+    border-radius: 3px;
+  }

@@ -23,7 +23,7 @@ function PDFPreviewSection({ navigate }) {
       <div className="pdf-preview">
         <h2>CS 70</h2>
         <p id='cs70-test-notes'>
-          {/* CS 70 content */}
+          qwer tyui op asdf fghj kl zxcv bnm <img src="https://media.licdn.com/dms/image/v2/D4E03AQEq6acYSAVOdw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1697226822551?e=1738800000&v=beta&t=ZObxQlPjljIxUWPmdsbX-rDMbWLmpnr9ShBC6qV7gWc" alt="harper!" />
         </p>
       </div>
     </div>
