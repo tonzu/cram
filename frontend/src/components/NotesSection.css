@@ -11,28 +11,29 @@
 
 /* Style for the Export Notes button */
 .export-notes-button {
-  position: absolute;
-  bottom: 20px;
-  right: 13px;
-  padding: 8px 16px; /* Adjusted padding for better button appearance */
-  background-color: #ff5722; /* Bright orange button */
-  color: #fff; /* White text */
+  background-color: #384959;
+  border-radius: 7px;
   border: none;
-  border-radius: 4px;
+  display: inline-block;
   cursor: pointer;
-  font-size: 14px; /* Slightly larger font */
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 8px 18px;
+  text-decoration: none;
   opacity: 0.9;
-  transition: opacity 0.3s, transform 0.3s; /* Add transition effects */
+  transition: opacity 0.3s, transform 0.3s;
 }
 
 .export-notes-button:hover {
-  opacity: 1; /* Fully opaque on hover */
-  transform: scale(1.05); /* Slightly enlarge the button on hover */
+  opacity: 1;
+  transform: scale(1.05);
 }
+
 
 /* Toolbar styling */
 .ql-toolbar {
-  background-color: #333; /* Dark background for toolbar */
+  background-color: #384959; /* Dark background for toolbar */
   color: white; /* Ensure text/icons in toolbar are white */
   border: none; /* Remove default border */
   border-radius: 8px 8px 0 0; /* Match the editor's rounded corners */

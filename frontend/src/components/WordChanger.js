@@ -1,18 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './WordChanger.css';
 
-function WordChanger({ isPlaying, wordSpeed, onWordChange }) {
+function WordChanger({ isPlaying, wordSpeed, onWordChange, setTotalWords }) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [contentArray, setContentArray] = useState([]);
   const delay = 60000 / wordSpeed;
   const intervalRef = useRef(null);
 
-  // Get content and set it to state when component mounts
+  // Get content and set it to state when the component mounts
   useEffect(() => {
     const txt = document.getElementById('cs70-test-notes');
-    console.log('Text Content:', txt);
     if (txt && txt.childNodes.length > 0) {
-      // Convert HTML content to array of nodes
       const nodes = Array.from(txt.childNodes);
       const content = nodes.reduce((acc, node) => {
         if (node.nodeType === Node.TEXT_NODE) {
@@ -23,60 +21,64 @@ function WordChanger({ isPlaying, wordSpeed, onWordChange }) {
         }
         return acc;
       }, []);
-      
+
       if (content.length > 0) {
         setContentArray(content);
+        setTotalWords(content.length); // Pass total words to parent
       }
     }
-  }, []);
+  }, [setTotalWords]);
 
+  // Notify parent of word changes
   useEffect(() => {
     if (onWordChange && contentArray.length > 0) {
-      onWordChange(contentArray[currentWordIndex]);
+      onWordChange(currentWordIndex, contentArray.length); // Pass current index and total words
     }
   }, [currentWordIndex, onWordChange, contentArray]);
 
+  // Highlight current word
   const highlightCurrentWord = (index) => {
     const txt = document.getElementById('cs70-test-notes');
     if (txt) {
-      // First ensure all content is properly wrapped
       if (!txt.innerHTML.includes('class="word"')) {
         const nodes = Array.from(txt.childNodes);
         txt.innerHTML = nodes.map(node => {
           if (node.nodeType === Node.TEXT_NODE) {
-            return node.textContent.split(/(\s+)/).map(part => 
+            return node.textContent.split(/(\s+)/).map(part =>
               part.trim() ? `<span class="word">${part}</span>` : part
             ).join('');
           }
           return node.outerHTML;
         }).join('');
       }
-      
-      // Remove previous highlights
+
       const wordElements = txt.querySelectorAll('.word');
       wordElements.forEach(word => word.classList.remove('highlighted'));
-      
-      // Add highlight to current word
       if (wordElements[index]) {
         wordElements[index].classList.add('highlighted');
       }
     }
   };
 
+  // Handle playback logic
   useEffect(() => {
     if (isPlaying && contentArray.length > 0) {
       intervalRef.current = setInterval(() => {
         setCurrentWordIndex((prevIndex) => {
-          const newIndex = (prevIndex + 1) % contentArray.length;
-          highlightCurrentWord(newIndex);
-          return newIndex;
+          const newIndex = prevIndex + 1;
+          if (newIndex < contentArray.length) {
+            highlightCurrentWord(newIndex);
+            return newIndex;
+          } else {
+            clearInterval(intervalRef.current); // Stop when reaching the end
+            return prevIndex; // Keep the index at the last word
+          }
         });
       }, delay);
     } else if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
 
-    // Highlight initial word
     highlightCurrentWord(currentWordIndex);
 
     return () => {

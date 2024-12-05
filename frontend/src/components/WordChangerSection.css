@@ -90,3 +90,30 @@
   padding: 15px;
   border-radius: 12px;
 }
+
+.wordbankfunctionality {
+  background-color: #7895b0;
+  border-radius: 7px;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 12px;
+  padding: 7px 14px;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.wordbankfunctionality:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.wordbank-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
