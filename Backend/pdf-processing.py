@@ -16,38 +16,20 @@ class PDFDocument(Base):
     __tablename__ = 'pdf_documents'
     
     id = Column(Integer, primary_key=True)
+    email = Column(String, nullable=True)
     filename = Column(String, nullable=False)
     s3_key = Column(String, nullable=False)
     text_content = Column(Text, nullable=True)
-    # Do we need images, form
 
 # upload and processing
-def handle_pdf(file_path):
+def handle_pdf():
+    
+    email, filename, s3_key = s3_upload()
    
-    bucket_name = ''  #######Replace 
-    
-    
-    s3_client = boto3.client(
-        's3',
-        aws_access_key_id=os.getenv('AWS_ACCESS_KEY'), #replace?
-        aws_secret_access_key=os.getenv('AWS_SECRET_KEY') #replace? 
-    )
-    
-    
-    s3_key = s3_upload()
-    
-
-    extracted_data_content = process_pdf(file_path)
+    extracted_data_content = process_pdf(s3_retrieve(s3_key))
    
     text_content = extracted_data_content["PDF text"]
     image_directories = extracted_data_content["PDF images"]
-    
-    ########## repalce###### 
-    db_user = ''  
-    db_password = '' 
-    db_host = ''  
-    db_port = '' 
-    db_name = ''  
     
     # Create a database engine
     engine = create_engine('postgresql://cram_owner:SZXGa9nA6cIN@ep-icy-union-a59g3itp.us-east-2.aws.neon.tech/cram?sslmode=require')
@@ -59,20 +41,13 @@ def handle_pdf(file_path):
     
     # Create a new PDFDocument instance
     pdf_document = PDFDocument(
-        filename=os.path.basename(file_path),
+        filename=filename,
         s3_key=s3_key,
-        text_content=text_content
+        text_content=text_content,
+        email=email
     )
     
     
     session.add(pdf_document)
     session.commit()
     session.close()
-    print("PDF processing complete and data stored successfully.")
-
-#fOR TESTING
-if __name__ == '__main__':
-    # Example usage
-    # Assume you have set environment variables for AWS and have a PDF file to process
-    pdf_file_path = ''  ######Replace 
-    handle_pdf(pdf_file_path)
