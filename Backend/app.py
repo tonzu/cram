@@ -1,24 +1,22 @@
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from config import Config
+from flask import Flask
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
+from routes import routes
+from flask_cors import CORS
 
+# Environment variables
 load_dotenv()
 
 app = Flask(__name__)
-app.config.from_object(Config)
-db = SQLAlchemy(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-from models import *
+# Set up PostgreSQL database
+db = SQLAlchemy()
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://cram_owner:SZXGa9nA6cIN@ep-icy-union-a59g3itp.us-east-2.aws.neon.tech/cram?sslmode=require"
+db.init_app(app)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/upload', methods=['POST'])
-def upload():
-    s3_upload()
-    return render_template("upload.html")
+# Load Flask routes
+app.register_blueprint(routes)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
