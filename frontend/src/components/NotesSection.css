@@ -1,0 +1,28 @@
+.left-column {
+    background-color: hsl(0, 0%, 24%);
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .left-column textarea {
+    width: 100%;
+    flex-grow: 1;
+    height: 70%;
+  }
+  
+  .export-notes-button {
+    position: absolute;
+    bottom: 20px;
+    right: 13px;
+    padding: 5px 10px;
+    background-color: #ff5722;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0.9;
+    align-self: flex-start;
+  }
