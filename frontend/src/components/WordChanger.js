@@ -17,7 +17,7 @@ function WordChanger({ isPlaying, wordSpeed, onWordChange, setTotalWords, active
 
   // Highlight current word
   const highlightCurrentWord = (index) => {
-    const txt = document.getElementById('cs70-test-notes');
+    const txt = document.getElementById('pdfText');
     if (txt) {
       if (!txt.innerHTML.includes('class="word"')) {
         const nodes = Array.from(txt.childNodes);

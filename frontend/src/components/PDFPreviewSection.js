@@ -70,7 +70,7 @@ function PDFPreviewSection({ navigate, userEmail, activePdf }) {
         <button className="Functionality" onClick={handleSignOut}>Sign out</button>
       </div>
       <div className="pdf-preview">
-        <p>{activePdf}</p>
+        <p id="pdfText">{activePdf}</p>
       </div>
       {isModalOpen && (
         <div className="modalStyle">
