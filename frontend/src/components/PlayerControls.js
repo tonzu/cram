@@ -1,5 +1,5 @@
-import React from "react";
-import "./PlayerControls.css";
+import React from 'react';
+import './PlayerControls.css';
 
 function PlayerControls({ isPlaying, setIsPlaying }) {
   const handlePlayPause = () => setIsPlaying(!isPlaying);
@@ -7,7 +7,7 @@ function PlayerControls({ isPlaying, setIsPlaying }) {
   return (
     <div className="player-controls">
       <button>⏪</button>
-      <button onClick={handlePlayPause}>{isPlaying ? "⏸" : "▶"}</button>
+      <button onClick={handlePlayPause}>{isPlaying ? '⏸' : '▶'}</button>
       <button>⏩</button>
     </div>
   );

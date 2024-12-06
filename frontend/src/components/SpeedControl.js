@@ -1,12 +1,7 @@
-import React from "react";
-import "./SpeedControl.css";
+import React from 'react';
+import './SpeedControl.css';
 
-function SpeedControl({
-  wordSpeed,
-  setWordSpeed,
-  eyeTracking,
-  setEyeTracking,
-}) {
+function SpeedControl({ wordSpeed, setWordSpeed, eyeTracking, setEyeTracking }) {
   const handleSpeedChange = (e) => {
     setWordSpeed(e.target.value * 5);
   };
@@ -23,11 +18,11 @@ function SpeedControl({
       />
       <span>{wordSpeed}</span>
       <label>
-        <input
-          type="checkbox"
-          checked={eyeTracking}
-          onChange={() => setEyeTracking(!eyeTracking)}
-        />
+        <input 
+          type="checkbox" 
+          checked={eyeTracking} 
+          onChange={() => setEyeTracking(!eyeTracking)} 
+        /> 
         Eye-Tracking
       </label>
     </div>

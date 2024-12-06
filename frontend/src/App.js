@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import NotesSection from "./components/NotesSection";
-import WordChangerSection from "./components/WordChangerSection";
-import PDFPreviewSection from "./components/PDFPreviewSection";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import NotesSection from './components/NotesSection';
+import WordChangerSection from './components/WordChangerSection';
+import PDFPreviewSection from './components/PDFPreviewSection';
+import { useNavigate } from 'react-router-dom';
 import { onAuthChange, getCurrentUserEmail } from "./Firebase"; // Import Firebase functions
 
 function App() {
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState('');
   const [wordSpeed, setWordSpeed] = useState(100);
   const [isPlaying, setIsPlaying] = useState(false);
   const [eyeTracking, setEyeTracking] = useState(false);
   const navigate = useNavigate();
 
-  const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState(""); // Store user email
   const [activePdf, setActivePdf] = useState("");
 
   useEffect(() => {
@@ -31,22 +31,24 @@ function App() {
   return (
     <div className="reader-container">
       <NotesSection notes={notes} setNotes={setNotes} />
-      <WordChangerSection
+      <WordChangerSection 
         wordSpeed={wordSpeed}
         setWordSpeed={setWordSpeed}
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
         eyeTracking={eyeTracking}
         setEyeTracking={setEyeTracking}
+        notes={notes} // Pass notes
+        setNotes={setNotes} // Pass setNotes function
         activePdf={activePdf}
         setActivePdf={setActivePdf}
         userEmail={userEmail}
       />
-      <PDFPreviewSection
+      <PDFPreviewSection 
         navigate={navigate}
         userEmail={userEmail}
         activePdf={activePdf}
-      />
+       />
     </div>
   );
 }

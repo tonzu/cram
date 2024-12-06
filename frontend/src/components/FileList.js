@@ -3,16 +3,12 @@ import axios from "axios";
 import './FileList.css';
 
 function FileList({ activePdf, setActivePdf, userEmail }) {
-
-  // Holds the user's list of uploaded pdfs
   const [pdfs, setPdfs] = useState([]);
 
-  // Updates the current pdf being viewed
   function updatePdf(item) {
     setActivePdf(item.text_content);
   }
 
-  // Checks for updated user files associated w/ email
   useEffect(() => {
     if (userEmail) {
       axios
