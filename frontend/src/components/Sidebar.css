@@ -1,0 +1,219 @@
+.importButton {
+  width: 270px;
+  margin: 3px;
+  height: 40px;
+  border-radius: 7px;
+  background-color: var(--foreground);
+  color: var(--background);
+  border: 2px solid var(--background);
+  font-size: 25px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.accountInfo {
+  position: absolute;
+  bottom: 0;
+  text-align: left;
+}
+
+.accountInfo h3 {
+  padding: 0 0 0 20px;
+  margin: 0;
+  text-align: left;
+}
+
+.accountInfo p {
+  margin: 0;
+  padding: 10px 0 0 20px;
+}
+
+.accountInfo button {
+  border: none;
+  color: red;
+  font-weight: bolder;
+  background: none;
+  padding: 10px 0 20px 20px;
+  cursor: pointer;
+  font-family: "Gabarito", serif;
+}
+
+.importButton:hover {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 2px solid var(--background);
+}
+
+.modalStyle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  color: #000;
+}
+
+.modalContentStyle {
+  background-color: #fff;
+  padding: 20px 20px 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  width: 300px;
+  height: 150px;
+}
+
+.buttonGroupStyle {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalContentStyle input {
+    font-family: "Gabarito", serif;
+    cursor: pointer;
+}
+
+.navbar {
+  height: 55px;
+  background-color: #384959;
+}
+
+.modalButton {
+    width: 70px;
+    height: 30px;
+    font-family: "Gabarito", serif;
+}
+
+#uploadButton {
+    background-color: #fff;
+    border-radius: 5px;
+    color: green;
+    border: 1px solid green;
+    cursor: pointer;
+}
+
+#uploadButton:hover {
+    background-color: green;
+    color: white;
+}
+
+#cancelButton {
+    background-color: #fff;
+    border-radius: 5px;
+    color: red;
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+#cancelButton:hover {
+    background-color: red;
+    color: white;
+}
+
+.navbar .title {
+  text-align: right;
+  margin: 0;
+  padding-top: 12px;
+  padding-right: 25px;
+  color: white;
+  font-size: 28px;
+}
+
+.navbar .libraryHeader {
+  padding-left: 20px;
+  float: left;
+}
+
+.navbar .editLibrary {
+  float: right;
+  padding: 8px 20px 0px 0px;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: absolute;
+  transition: translate var(--animation-timing);
+  translate: -100%;
+  padding: 0.5rem 1 rem;
+  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
+  background-color: var(--foreground);
+  color: var(--background);
+  width: 340px;
+  height: calc(100vh - 55px);
+  z-index: 100;
+  text-align: center;
+}
+
+/* Hamburger menu styles and animations */
+:root {
+  --bar-width: 35px;
+  --bar-height: 5px;
+  --hamburger-gap: 6px;
+  --foreground: #333;
+  --background: white;
+  --hamburger-margin: 15px;
+  --animation-timing: 200ms ease-in-out;
+  --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+}
+
+.hamburger-menu {
+  --x-width: calc(var(--hamburger-height) * 1.41421356237);
+  display: flex;
+  flex-direction: column;
+  gap: var(--hamburger-gap);
+  width: max-content;
+  position: absolute;
+  top: var(--hamburger-margin);
+  left: var(--hamburger-margin);
+  z-index: 999;
+  cursor: pointer;
+}
+
+.hamburger-menu::before,
+.hamburger-menu::after,
+.hamburger-menu input {
+  content: "";
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: var(--background);
+  border-radius: 999px;
+  transform-origin: left center;
+  transition: opacity var(--animation-timing), width var(--animation-timing),
+    rotate var(--animation-timing), translate var(--animation-timing),
+    background-color var(--animation-timing);
+}
+
+.hamburger-menu input {
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  pointer-events: none;
+}
+
+.hamburger-menu:has(input:checked)::before {
+  rotate: 45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / -2);
+}
+
+.hamburger-menu:has(input:checked)::after {
+  rotate: -45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / 2);
+}
+
+.hamburger-menu input:checked {
+  opacity: 0;
+  width: 0;
+}
+
+.hamburger-menu:has(input:checked)+.sidebar {
+  translate: 0;
+  box-shadow: 3px 3px 12px rgb(20, 20, 20);
+}

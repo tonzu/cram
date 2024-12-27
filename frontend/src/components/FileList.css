@@ -1,0 +1,38 @@
+.fileButton {
+  width: 270px;
+  margin: 3px 10px 3px 3px;
+  height: 40px;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 2px solid var(--background);
+  transition: 0.2s;
+  font-family: "Gabarito", serif;
+}
+
+.fileButton:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.deleteButton {
+  cursor: pointer;
+}
+
+.listContainer {
+  text-align: center;
+}
+
+.fileRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.deleteButtonContainer {
+  width: 15px;
+  margin-right: 10px;
+}

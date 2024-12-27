@@ -1,0 +1,70 @@
+/* Reset margin and padding for the body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.auth-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.auth-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video covers the entire screen */
+  z-index: -1; /* Keeps the video behind the content */
+}
+
+.auth-box {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+  z-index: 1; /* Keeps the box above the video */
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form input {
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.auth-form button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.auth-form button:hover {
+  background-color: #555;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

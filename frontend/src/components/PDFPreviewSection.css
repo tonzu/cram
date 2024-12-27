@@ -1,0 +1,46 @@
+.right-column {
+  padding-top: 40px;
+  padding-right: 80px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.pdf-preview {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 16px;
+  height: 733px;
+  overflow: auto;
+}
+
+.pdf-preview input {
+  all: unset;
+  cursor: pointer;
+  padding: 1px;
+  margin-right: 0.25em;
+}
+
+.progress-bar {
+  background-color: #384959;
+  height: 8px;
+  width: calc(100% - 100px);
+  border-radius: 4px;
+  position: relative;
+  margin-top: 15px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-indicator {
+  background-color: #88BDF2;
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  transition: width 0.2s ease-in-out;
+}
+
+.highlighted {
+  background-color: #fffa6e !important;
+  border-radius: 3px;
+}

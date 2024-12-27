@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+body {
+  font-family: "Gabarito", serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.reader-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  height: calc(100vh - 55px);
+  width: 100%;
+  margin: 0 auto;
+  background: linear-gradient(to bottom,
+      #336699,
+      /* Dark blue at the top */
+      #e0e0e0
+      /* Light blue at the bottom */
+    );
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #afafaf;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+}

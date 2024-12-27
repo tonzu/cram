@@ -1,0 +1,41 @@
+.flashing-word-container {
+  padding: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 95%;
+  max-width: 580px;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.flashing-word {
+  font-size: 55px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flashing-word img {
+  max-height: 200px;
+  width: auto;
+  object-fit: contain;
+}
+
+.word {
+  padding: 2px;
+  margin: 0 2px;
+}
+
+.playbackControls {
+  height: 25px;
+  margin-bottom: 15px;
+}
+
+.spacer {
+  margin-top: 15px;
+  height: 25px;
+}

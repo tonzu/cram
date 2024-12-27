@@ -1,0 +1,13 @@
+.speed-control {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  }
+
+.speedSlider {
+  width: 35%;
+  cursor: ew-resize;
+}
