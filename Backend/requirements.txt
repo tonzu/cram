@@ -1,6 +1,0 @@
-SQLAlchemy
-Flask
-boto3
-PyMuPDF
-psycopg2-binary
-python-dotenv
